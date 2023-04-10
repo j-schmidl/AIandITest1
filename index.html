@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AI and I</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #01032d;
+			color: white;
+		}
+		
+		.header {
+			background-image: url('Logo.png');
+			background-size: cover;
+			background-position: center;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.header h1 {
+			font-size: 3rem;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
+		
+		.section {
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+		}
+		
+		.section.active {
+			opacity: 1;
+		}
+		
+		.nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			padding: 10px 0;
+			background-color: #d670c3;
+			z-index: 999;
+		}
+		
+		.nav a {
+			color: white;
+			text-decoration: none;
+			padding: 10px;
+			font-weight: bold;
+			transition: color 0.5s ease-in-out;
+		}
+		
+		.nav a:hover {
+			color: #ec6ac6;
+		}
+		
+		.blog {
+			background-color: #ec6ac6;
+			padding: 50px;
+			text-align: center;
+		}
+		
+		.blog h2 {
+			font-size: 2rem;
+			margin: 0;
+			padding: 0;
+		}
+		
+		.blog p {
+			font-size: 1.2rem;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<nav class="nav">
+		<a href="#header">Home</a>
+		<a href="#videos">Videos</a>
+		<a href="#podcasts">Podcasts</a>
+		<a href="#blog">Blog</a>
+		<a href="#contact">Contact</a>
+	</nav>
+	
+	<section id="header" class="header">
+		<h1>AI and I</h1>
+	</section>
+	
+	<section id="videos" class="section">
+		<h2>Videos</h2>
+		<p>Here you can find our latest videos.</p>
+	</section>
+	
+	<section id="podcasts" class="section">
+		<h2>Podcasts</h2>
+		<p>Here you can listen to our latest podcasts.</p>
+	</section>
+	
+	<section id="blog" class="section">
+		<div class="blog">
+			<h2>Blog</h2>
+			<p
+		Welcome to our blog! Here you can find our latest posts.</p>
+		<a href="blog.html">Read more</a>
+	</div>
+</section>
+
+<section id="contact" class="section">
+	<h2>Contact Us</h2>
+	<p>Feel free to contact us with any questions or comments.</p>
+</section>
+
+<script>
+	const sections = document.querySelectorAll('.section');
+	const navLinks = document.querySelectorAll('.nav a');
+	
+	function changeNavActive() {
+		let index = sections.length;
+		
+		while(--index && window.scrollY + 50 < sections[index].offsetTop) {}
+		
+		navLinks.forEach((link) => link.classList.remove('active'));
+		navLinks[index].classList.add('active');
+		
+		sections.forEach((section) => {
+			if (window.scrollY + window.innerHeight > section.offsetTop + section.offsetHeight / 2) {
+				section.classList.add('active');
+			} else {
+				section.classList.remove('active');
+			}
+		});
+	}
+	
+	changeNavActive();
+	
+	window.addEventListener('scroll', changeNavActive);
+</script>
+</body>
+</html>
